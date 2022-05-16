@@ -32,6 +32,7 @@ exports.gallery = async (req, res) => {
 /**
  * GET /login
  * LOGIN
+ *
  */
 exports.login = async (req, res) => {
   try {
@@ -47,7 +48,8 @@ exports.login = async (req, res) => {
  * GET /register
  * Register
  */
-exports.gallery = async (req, res) => {
+
+exports.register = async (req, res) => {
   try {
     const limitNumber = 5;
     console.log("Rendered from Controller");

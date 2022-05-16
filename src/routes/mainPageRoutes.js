@@ -9,7 +9,7 @@ router.get("/gallery", galleryController.gallery);
 
 router.get("/login", galleryController.login);
 
-// router.get("/register", galleryController.register);
+router.get("/register", galleryController.register);
 
 router.post("/calendarTerm", galleryController.calendarTerm);
 
