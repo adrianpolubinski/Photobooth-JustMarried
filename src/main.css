@@ -1,0 +1,11 @@
+p {
+  color: green;
+}
+
+p {
+  color: red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIl9zZXR0aW5ncy5zY3NzIiwibWFpbi5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFBO0FDQ0o7O0FERUE7RUFDSSxVQUFBO0VBRUEsb0JBQUE7RUFBQSxvQkFBQTtFQUFBLGFBQUE7QUNBSiIsImZpbGUiOiJtYWluLmNzcyIsInNvdXJjZXNDb250ZW50IjpbInAge1xyXG4gICAgY29sb3I6Z3JlZW47XHJcbn1cclxuXHJcbnB7XHJcbiAgICBjb2xvcjpyZWQ7XHJcblxyXG4gICAgZGlzcGxheTogZmxleDtcclxufSIsInAge1xuICBjb2xvcjogZ3JlZW47XG59XG5cbnAge1xuICBjb2xvcjogcmVkO1xuICBkaXNwbGF5OiBmbGV4O1xufSJdfQ== */
