@@ -15,15 +15,18 @@
     './components/contact',
     './components/header', 
     './components/main-nav',
-    
+    './components/reservation',
     './components/slider',
     './components/price-list',
     './components/info-list',
     './components/info-box',
     './components/footer',
-    './components/form',
-    
     './components/cookies';  
+
+// forms 
+@import
+    './forms/reservation',
+    './forms/form';
 
 // layouts
 @import 
