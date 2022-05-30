@@ -56,7 +56,7 @@ export default class Calendar {
 
   createPopup(day){
     const dateText= day.textContent+"-"+this.monthText+"-"+this.date.getFullYear();
-   
+
     const reservation = document.createElement("div");
     reservation.classList.add("c-reservation");
 
@@ -71,34 +71,62 @@ export default class Calendar {
     reservationTitleDate.classList.add("c-reservation__title-date");
     reservationTitleDate.textContent= dateText;
 
-
     reservationTitle.appendChild(reservationTitleName);
     reservationTitle.appendChild(reservationTitleDate);
 
     const reservationForm = document.createElement("form");
     reservationForm.classList.add("f-reservation");
     reservationForm.method = "POST";
-    reservationForm.action = "reservation";
+    reservationForm.action = "calendarTerm";
 
-    const texts = ["Imie i nazwisko:", "Email:", "Numer telefonu:"];
-    const names = ["name", "email", "phone"];
+    const formWrappers = new Array(5);
+    for(let i=0; i<formWrappers.length; i++) {
+      formWrappers[i] = document.createElement("div");
+      formWrappers[i].classList.add("f-reservation__input-wrapper");
+    }
+
+    const labelTexts = ["Imie i nazwisko:", "Email:", "Numer telefonu:"];
+    const ids = ["name", "email", "phone"];
     const types = ["text","email","text"];
-    for(let i=0; i<names.length; i++) {
+
+    for(let i=0; i<ids.length; i++) {
       const label = document.createElement('label');
-      label.htmlFor=names[i];
+      label.htmlFor=ids[i];
       label.classList.add("f-reservation__label");
-      label.textContent=texts[i];
+      label.textContent=labelTexts[i];
+
       const input = document.createElement('input');
-      input.id=names[i];
+      input.id=ids[i];
+      input.name=ids[i];
       input.type=types[i];
       input.classList.add("f-reservation__input");
-      input.name=names[i];
-      const inputWrapper =  document.createElement("div");
-      inputWrapper.classList.add("f-reservation__input-wrapper");
-      inputWrapper.appendChild(label);
-      inputWrapper.appendChild(input);
-      reservationForm.appendChild(inputWrapper)
+      
+      formWrappers[i].appendChild(label);
+      formWrappers[i].appendChild(input);
+      reservationForm.appendChild(formWrappers[i])
     }
+
+    const labelPackages = document.createElement('label');
+    labelPackages.htmlFor="packages";
+    labelPackages.classList.add("f-reservation__label") 
+    labelPackages.textContent="Wybierz pakiet:";
+
+    const packages = document.createElement('select');
+    packages.id="packages";
+    packages.name="packages";
+
+    const packageValues = ['stypa', 'potupajka', 'remiza'];
+    const packageNames=['Pakiet Stypa (2 Godziny)','Pakiet Potupajka (3 Godziny)','Pakiet Remiza (4 Godziny)']
+    const packageOptions = [];
+    for(let i=0; i<3; i++){  
+      packageOptions[i]=document.createElement('option');
+      packageOptions[i].value=packageValues[i];
+      packageOptions[i].textContent=packageNames[i];
+      packages.appendChild(packageOptions[i]);
+    }
+    
+    formWrappers[3].appendChild(labelPackages);
+    formWrappers[3].appendChild(packages);
 
     const button = document.createElement('button');
     button.type="submit";
@@ -110,21 +138,21 @@ export default class Calendar {
     reservationClose.classList.add("f-reservation__close")
     reservationClose.textContent="Anuluj";
 
-    const inputWrapper =  document.createElement("div");
-    inputWrapper.classList.add("f-reservation__input-wrapper");
-    inputWrapper.appendChild(button);
-    inputWrapper.appendChild(reservationClose);
+    formWrappers[4].appendChild(button);
+    formWrappers[4].appendChild(reservationClose);
+
+    reservationForm.appendChild(formWrappers[3]);
+    reservationForm.appendChild(formWrappers[4]);
 
     reservation.appendChild(reservationTitle);
     reservation.appendChild(reservationForm);
-    reservationForm.appendChild(inputWrapper);
     
     return reservation;
   }
 
   addListeners() {  
     this.leftArrow.addEventListener("click", () => {
-      if (this.date.getMonth() > new Date().getMonth()) {
+      if (this.date.getMonth() > new Date().getMonth() || this.date.getYear() > new Date().getYear()) {
         this.date.setMonth(this.date.getMonth() - 1);
         this.initCalendar();
         this.counter--;
@@ -187,14 +215,11 @@ export default class Calendar {
 
   initCalendar() {
     this.month = this.date.getMonth();
-    this.monthText = document.querySelector(this.Selector.monthText).innerHTML =
-      this.months[this.month];
+    this.monthText = this.months[this.month];
 
     // console.log(this.date.getDay());
-    let whatDay = this.date.getDay() === 0 ? 6 : this.date.getDay() - 1;
+    // let whatDay = this.date.getDay() === 0 ? 6 : this.date.getDay() - 1;
     this.dateText = document.querySelector(this.Selector.dateText).innerHTML =
-      this.days[whatDay] +
-      " " +
       this.months[this.date.getMonth()] +
       " " +
       this.date.getFullYear();
@@ -207,6 +232,7 @@ export default class Calendar {
       0
     ).getDate();
     this.date.setDate(1);
+
     const firstDayIndex = this.date.getDay() === 0 ? 7 : this.date.getDay();
     const prevLastDay = new Date(
       this.date.getFullYear(),

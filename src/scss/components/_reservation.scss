@@ -1,0 +1,30 @@
+.c-reservation{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: color(white-1);
+    height: 100%;
+    background-color: color(gray-5);
+    z-index: z-index(popup);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.c-reservation__title{
+background-color: color(gray-3);
+padding: 1rem 2rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+
+
+.c-reservation__button{
+    @include button-reset;
+    border: 2px solid red
+}
