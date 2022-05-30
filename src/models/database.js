@@ -14,3 +14,4 @@ db.once("open", function () {
 
 //Models
 require("./Test");
+require("./reservation");

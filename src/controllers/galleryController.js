@@ -1,6 +1,7 @@
 require("../models/database");
 const Test = require("../models/Test");
 const Image = require("../models/UploadFile");
+const Reservation = require("../models/reservation");
 const fs = require("fs");
 /**
  * GET /
@@ -104,7 +105,17 @@ exports.mailer = async (req, res) => {
  */
 exports.calendarTerm = async (req, res) => {
   try {
-    console.log("post Term in calendar");
+    const newReservation = new Reservation({
+      Name: req.body.name,
+      Date: req.body.date,
+      Email: req.body.email,
+      Phone: req.body.phone,
+      Packet: req.body.packages,
+      Accepted: "No",
+    });
+
+    await newReservation.save();
+    res.status(201).redirect("/");
   } catch (error) {
     res.status(500).send({ message: error.message || "Error Occured" });
   }
