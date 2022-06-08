@@ -100,6 +100,39 @@ exports.mailer = async (req, res) => {
   }
 };
 /**
+ * POST /reservationAccepter
+ * ACCEPTRESERVATION
+ */
+exports.mailer = async (req, res) => {
+  try {
+    const name = req.body.name;
+    const email = req.body.email;
+    const phone = req.body.phone;
+    const message = req.body.message;
+
+    let transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: "jmhelper186@gmail.com", // generated ethereal user
+        pass: "azrfoclbjqlgtsrk", // generated ethereal password
+      },
+    });
+
+    transporter.sendMail({
+      from: '"Fotobudka JM 👻" <jmhelper186@gmail.com>',
+      to: email, // list of receivers
+      subject: "Potwierdzenie rezerwacji terminu.", // Subject line
+      text: "Witaj,\n twoja rezerwacja została Zaakceptowana przez administratora. Skontaktujemy się z tobą w najbliższym czasie w celu ustalenia metody i terminu płatności.",
+    });
+
+    res.redirect("/");
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error Occured" });
+  }
+};
+/**
  * POST /calendarTerm
  * CALENDARTERM
  */
