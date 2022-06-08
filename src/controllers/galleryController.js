@@ -3,15 +3,15 @@ const Test = require("../models/Test");
 const Image = require("../models/UploadFile");
 const Reservation = require("../models/reservation");
 const fs = require("fs");
+const { render } = require("ejs");
+
 /**
  * GET /
  * Homepage
  */
 exports.homepage = async (req, res) => {
   try {
-    const limitNumber = 5;
-    console.log("Rendered from Controller");
-    res.render("index", { title: "JustMarried Page - Home" });
+    res.render("index.html");
   } catch (error) {
     res.status(500).send({ message: error.message || "Error Occured" });
   }

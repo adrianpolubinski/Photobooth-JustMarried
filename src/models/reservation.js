@@ -23,7 +23,6 @@ const reservationSchema = new mongoose.Schema({
   Packet: {
     type: String,
     required: true,
-    unique: true,
   },
   Accepted: {
     type: String,

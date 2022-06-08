@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const galleryController = require("../controllers/galleryController");
+const apiController = require("../controllers/apiController");
 const store = require("../middleware/upload");
 
 router.get("/", galleryController.homepage);
@@ -10,6 +11,8 @@ router.get("/gallery", galleryController.gallery);
 router.get("/login", galleryController.login);
 
 router.get("/register", galleryController.register);
+
+router.get("/api/reservations", apiController.reservations);
 
 router.post("/calendarTerm", galleryController.calendarTerm);
 

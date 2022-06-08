@@ -1,22 +1,20 @@
 require("dotenv").config();
 
-const path = require("path");
-const nodemailer = require("nodemailer");
 const express = require("express");
 var bodyParser = require("body-parser");
+const path = require("path");
 
-const app = express(),
-  DIST_DIR = __dirname,
-  HTML_FILE = path.join(DIST_DIR, "index.html");
-
-app.use(express.static(DIST_DIR));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+const app = express();
+app.use(express.static(__dirname, { index: "_" }));
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.engine("html", require("ejs").renderFile);
+app.set("view engine", "html");
+app.set("views", path.join(__dirname, "views"));
 
 const routes = require("./routes/mainPageRoutes.js");
-
-let gfs;
 
 app.use("/", routes);
 
