@@ -12,7 +12,10 @@ router.get("/login", galleryController.login);
 
 router.get("/register", galleryController.register);
 
-router.get("/api/reservations", apiController.reservations);
+router.get(
+  "/api/reservations/:year?/:month?/:accept?",
+  apiController.reservations
+);
 
 router.post("/calendarTerm", galleryController.calendarTerm);
 

@@ -4,12 +4,13 @@ export default class Calendar {
     this.day = null;
     this.date = null;
     this.month = null;
+    this.showMonth = null;
     this.monthText = null;
     this.leftArrow = null;
     this.rightArrow = null;
     this.nextMonthDay = null;
     this.lBody = null;
-    this.year = null;
+    this.showYear = null;
     this.reservationClose = null;
     this.popup = null;
     this.currentDay = null;
@@ -54,17 +55,7 @@ export default class Calendar {
     this.initCalendar();
     this.currentDay = document.querySelector(this.Selector.currentDay);
     this.addListeners();
-
-    fetch("http://localhost:3000/api/reservations")
-      .then((res) => res.json())
-      .then((dates) => {
-        for (let date of dates) {
-          this.reservedDays.push(date.split("-")[0]);
-          this.reservedMonths.push(date.split("-")[1]);
-          this.reservedYears.push(date.split("-")[2]);
-        }
-        this.setReservations();
-      });
+    this.setReservations();
   }
 
   getAllIndexes(arr, val) {
@@ -76,43 +67,37 @@ export default class Calendar {
     return indexes;
   }
   setReservations() {
-    const tmp = document.querySelectorAll(this.Selector.day);
-    const actualMonthDays = [];
-    tmp.forEach((e) => {
-      if (
-        e.classList.value == "js-day" ||
-        e.classList.value == "c-calendar__current js-current js-day"
-      )
-        actualMonthDays.push(e);
-    });
+    const days = [];
+    fetch(
+      `http://localhost:3000/api/reservations/${this.showYear}/${this.showMonth}`
+    )
+      .then((res) => res.json())
+      .then((docs) => {
+        for (let doc of docs) {
+          days.push(doc.Date.split("-")[0]);
+        }
 
-    console.log(this.year);
-    // const indexesOfReservedYears= this.getAllIndexes(thi
+        const tmp = document.querySelectorAll(this.Selector.day);
+        const actualMonthDays = [];
+        tmp.forEach((e) => {
+          if (
+            e.classList.value == "js-day" ||
+            e.classList.value == "c-calendar__current js-current js-day"
+          )
+            actualMonthDays.push(e);
+        });
 
-    const indexesOfReservedMonths = this.getAllIndexes(
-      this.reservedMonths,
-      this.monthText
-    );
-
-    const indexesOfReservedDays = [];
-
-    for (let month of indexesOfReservedMonths) {
-      indexesOfReservedDays.push(this.reservedDays[month]);
-    }
-
-    console.log(indexesOfReservedDays);
-    actualMonthDays.forEach((e) => {
-      const counter = indexesOfReservedDays.filter(
-        (x) => x == e.textContent
-      ).length;
-      if (counter == 1) {
-        e.classList.add("c-calendar__reserved");
-        e.classList.add("c-calendar__reserved--once");
-      } else if (counter >= 2) {
-        e.classList.add("c-calendar__reserved");
-        e.classList.add("c-calendar__reserved--twice");
-      }
-    });
+        actualMonthDays.forEach((e) => {
+          const counter = days.filter((x) => x == e.textContent).length;
+          if (counter == 1) {
+            e.classList.add("c-calendar__reserved");
+            e.classList.add("c-calendar__reserved--once");
+          } else if (counter >= 2) {
+            e.classList.add("c-calendar__reserved");
+            e.classList.add("c-calendar__reserved--twice");
+          }
+        });
+      });
   }
 
   createPopup(day) {
@@ -334,6 +319,7 @@ export default class Calendar {
         prevLastDay - x + 1
       }</div>`;
     }
+
     for (let i = 1; i <= lastDay; i++) {
       if (
         i === new Date().getDate() &&
@@ -349,5 +335,7 @@ export default class Calendar {
       monthDays.innerHTML = days;
     }
     this.day = document.querySelectorAll(this.Selector.day);
+    this.showYear = this.date.getFullYear();
+    this.showMonth = this.monthText;
   }
 }

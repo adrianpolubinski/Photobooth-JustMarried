@@ -1,13 +1,14 @@
 const Reservation = require("../models/reservation");
 exports.reservations = async (req, res) => {
   try {
-    Reservation.find({}, (err, docs) => {
-      const dates = [];
-      for (doc of docs) {
-        dates.push(doc.Date);
+    let params = req.params.month + "-" + req.params.year;
+    params = params.replaceAll("undefined", "");
+    Reservation.find(
+      { Date: { $regex: params, $options: "i" } },
+      (err, docs) => {
+        res.json(docs);
       }
-      res.json(dates);
-    });
+    );
   } catch (error) {
     res.status(500).send({ message: error.message || "Error Occured" });
   }
