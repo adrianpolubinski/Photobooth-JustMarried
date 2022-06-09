@@ -11,7 +11,9 @@ const { render } = require("ejs");
  */
 exports.homepage = async (req, res) => {
   try {
-    res.render("index.html");
+    res.render("index", {
+      title: "Just Married || Home Page",
+    });
   } catch (error) {
     res.status(500).send({ message: error.message || "Error Occured" });
   }
@@ -37,9 +39,11 @@ exports.gallery = async (req, res) => {
  */
 exports.login = async (req, res) => {
   try {
-    const limitNumber = 5;
-    console.log("Rendered from Controller");
-    res.status(200).send("Login page");
+    // const limitNumber = 5;
+
+    res.render("login", {
+      title: "Just Married || Logowanie",
+    });
   } catch (error) {
     res.status(500).send({ message: error.message || "Error Occured" });
   }

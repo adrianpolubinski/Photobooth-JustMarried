@@ -11,9 +11,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.engine("html", require("ejs").renderFile);
-app.set("view engine", "html");
-app.set("views", path.join(__dirname, "views"));
-
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/views"));
 const routes = require("./routes/mainPageRoutes.js");
 
 app.use("/", routes);
