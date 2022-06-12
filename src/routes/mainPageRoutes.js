@@ -8,7 +8,7 @@ router.get("/", galleryController.homepage);
 
 router.get("/gallery", galleryController.gallery);
 
-router.get("/login", galleryController.login);
+router.get("/signin", galleryController.signin);
 
 router.get("/register", galleryController.register);
 

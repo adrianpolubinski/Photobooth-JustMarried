@@ -11,6 +11,7 @@ const { render } = require("ejs");
  */
 exports.homepage = async (req, res) => {
   try {
+    console.log("test from /");
     res.render("index", {
       title: "Just Married || Home Page",
     });
@@ -37,11 +38,10 @@ exports.gallery = async (req, res) => {
  * LOGIN
  *
  */
-exports.login = async (req, res) => {
+exports.signin = async (req, res) => {
   try {
-    // const limitNumber = 5;
-
-    res.render("login", {
+    console.log("test from /");
+    res.render("signin", {
       title: "Just Married || Logowanie",
     });
   } catch (error) {

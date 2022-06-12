@@ -4,7 +4,7 @@ exports.reservations = async (req, res) => {
     let params = req.params.month + "-" + req.params.year;
     params = params.replaceAll("undefined", "");
     Reservation.find(
-      { Date: { $regex: params, $options: "i" } },
+      { Date: { $regex: params, $options: "i" }, Accepted: "Yes" },
       (err, docs) => {
         res.json(docs);
       }

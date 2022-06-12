@@ -13,9 +13,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
-const routes = require("./routes/mainPageRoutes.js");
 
-app.use("/", routes);
+app.use("/admin", require("./routes/adminRoutes.js"));
+app.use("/signin", require("./routes/signinRoutes.js"));
+app.use("/", require("./routes/mainPageRoutes.js"));
 
 const PORT = 3000;
 app.listen(PORT, () => {

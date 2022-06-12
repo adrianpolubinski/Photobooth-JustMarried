@@ -20,16 +20,24 @@
     './components/price-list',
     './components/info-list',
     './components/info-box',
+    './components/signin',
     './components/footer',
-    './components/cookies';  
+    './components/cookies',
+    './components/date.scss',
+    './components/reservations-list.scss';  
 
 // forms 
 @import
     './forms/reservation',
+    './forms/signin',
     './forms/form';
 
 // layouts
 @import 
     './layouts/body',
     './layouts/inner',
-    './layouts/cookies';
+    './layouts/footer',
+    './layouts/header',
+    './layouts/cookies',
+    './layouts/signin.scss',
+    './layouts/slider';
