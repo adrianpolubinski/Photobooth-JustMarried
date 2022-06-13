@@ -1,0 +1,48 @@
+.c-reservations-list{
+   display: flex;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+    // justify-content: space-around;
+    align-content: flex-start;
+    align-items: flex-start;
+    gap: 2rem;
+    height: calc(100vh - 75px - 250px - 50px);
+}
+
+.c-reservations-list__reservation{
+    width: auto;
+    border: 2px solid color(gray-1);
+    display: flex;
+}
+
+.c-reservations-list__packet {
+    background-color: color(green-1);
+    text-align: center;
+}
+
+.c-reservations-list__reservation-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.c-reservations-list__action{
+    display: flex;
+    justify-content: center;
+}
+
+.c-reservations-list__accept{
+    color: color(white-1);
+    padding: 0 0.75rem;
+    background-color: color(green-neon);
+}
+
+.c-reservations-list__reject{
+    color: color(white-1);
+    padding: 0 0.75rem;
+    background-color: color(red-neon);
+}
+
+.c-reservations-list__client-info{
+    
+    padding: 0.75rem;
+}

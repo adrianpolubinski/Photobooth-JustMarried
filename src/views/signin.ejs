@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <%- include("./partials/head.ejs") %>
+
+  <body class="l-body ui-theme ui-theme--dark">
+    <div class="l-page">
+      <%- include ("./partials/header.ejs") %>
+
+      <div class="l-signin">
+        <div class="c-signin">
+          <h2 class="c-signin__title">Logowanie</h2>
+          <form action="signin" method="post" class="f-signin">
+            <div class="f-signin__input-wrapper">
+              <label for="login" class="f-signin__label"> Login: </label>
+              <input
+                id="login"
+                type="text"
+                class="f-signin__input"
+                name="login"
+                required
+              />
+            </div>
+            <div class="f-signin__input-wrapper">
+              <label for="password" class="f-signin__label"> Hasło: </label>
+              <input
+                id="password"
+                type="password"
+                class="f-signin__input"
+                name="password"
+                required
+              />
+            </div>
+
+            <% if(typeof(err) != "undefined") { %>
+            <p class="c-singin__error">Nieprawidłowy login lub hasło!</p>
+            <% } %>
+            <div class="f-signin__input-wrapper">
+              <button type="submit" class="f-signin__submit">Zaloguj</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <%- include ("./partials/footer.ejs") %>
+    </div>
+  </body>
+</html>

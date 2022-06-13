@@ -1,0 +1,25 @@
+.f-signin{
+    border: 1px solid color(white-1);
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 300px;
+}
+.f-signin__input-wrapper{
+    display: flex;
+    justify-content: space-around;
+    font-size: 2rem;
+    }
+.f-signin__input-wrapper:not(:last-child){
+    margin-bottom: 1.5rem;
+}
+
+
+.f-signin__submit{
+    @include button-reset();
+    background-color: color(gray-1);
+    font-size: 2rem;
+    padding: 0.5rem 2rem;
+    color: color(white-1);
+    align-items: center;
+
+}

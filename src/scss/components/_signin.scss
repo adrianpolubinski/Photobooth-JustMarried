@@ -1,0 +1,17 @@
+.c-signin{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.c-signin__title{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.c-singin__error{
+    color: color(red-neon);
+    text-align: center;
+    margin-bottom: 1rem;
+}

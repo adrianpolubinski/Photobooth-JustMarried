@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <%- include("./partials/head.ejs") %>
+
+  <body class="l-body ui-theme ui-theme--dark">
+    <div class="l-page">
+      <%- include ("./partials/header.ejs") %>
+
+      <main class="l-main">
+        <div class="l-inner">
+          <div class="c-reservations-list">
+            <% reservations.forEach(element => { const date =
+            element.Date.split("-") %>
+
+            <div class="c-reservations-list__reservation">
+              <div class="c-reservations-list__date-block-container">
+                <div class="c-date-block">
+                  <p class="c-date-block__day"><%= date[0] %></p>
+                  <p class="c-date-block__month"><%= date[1] %></p>
+                  <p class="c-date-block__year"><%= date[2] %></p>
+                </div>
+              </div>
+
+              <div class="c-reservations-list__reservation-info">
+                <div class="c-reservations-list__packet-container">
+                  <p class="c-reservations-list__packet">
+                    <%= element.Packet %>
+                  </p>
+                </div>
+
+                <div class="c-reservations-list__client-info">
+                  <p class="c-reservations-list__name"><%= element.Name %></p>
+                  <p class="c-reservations-list__email"><%= element.Email %></p>
+                  <p class="c-reservations-list__phone"><%= element.Phone %></p>
+                  <div class="c-reservations-list__action">
+                    <form method="post" action="admin/updateReservation">
+                      <input
+                        type="hidden"
+                        name="id"
+                        value="<%= element._id %>"
+                      />
+                      <input
+                        type="submit"
+                        name="action"
+                        value="Accept"
+                        class="c-reservations-list__accept"
+                      />
+                      <input
+                        type="submit"
+                        name="action"
+                        value="Reject"
+                        class="c-reservations-list__reject"
+                      />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </main>
+
+      <%- include ("./partials/footer.ejs") %>
+    </div>
+  </body>
+</html>
